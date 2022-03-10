@@ -77,7 +77,6 @@ public class ContextV1Test {
 
     @Test
     void strategyV3() {
-
         ContextV1 context1 = new ContextV1(new Strategy() {
             @Override
             public void call() {
@@ -92,6 +91,18 @@ public class ContextV1Test {
                 log.info("비즈니스 로직2 실행");
             }
         });
+        context2.execute();
+    }
+
+    /**
+     * 인터페이스에 메서드가 1개만 있는 함수형 인터페이스이므로 람다 표현식 적용 가능
+     */
+    @Test
+    void strategyV4() {
+        ContextV1 context1 = new ContextV1(() -> log.info("비즈니스 로직1 실행"));
+        context1.execute();
+
+        ContextV1 context2 = new ContextV1(() -> log.info("비즈니스 로직2 실행"));
         context2.execute();
     }
 }
